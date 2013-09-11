@@ -1,7 +1,7 @@
 /**
  * Flagity v1.0.0-beta
  *
- * Custom binding to switch boolean attibutes of the DOM with flags
+ * Custom binding for knockoutjs to switch boolean attibutes of the DOM with flags
  *
  * Copyright(c) 2013 Delmo Carrozzo <dcardev@gmail.com>
  * MIT Licensed
@@ -45,7 +45,7 @@
             if (fComparer !== undefined && "function" == typeof fComparer) {
                 return fComparer.apply(this, [flags, ko.unwrap(this.flag), this.type])
             }
-            
+
             return this.comparer.apply(this, [flags, ko.unwrap(this.flag), this.type])
         };
 

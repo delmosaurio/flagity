@@ -1,6 +1,6 @@
 # flagity
 
-Custom binding to switch boolean attibutes of the DOM with flags
+Custom binding for [knockoutjs](http://knockoutjs.com/) to switch boolean attibutes of the DOM with flags
 
 ## license 
 
