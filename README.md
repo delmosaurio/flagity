@@ -1,6 +1,6 @@
 # flagity
 
-Switch boolean attributes with flags
+Custom binding to switch boolean attibutes of the DOM with flags
 
 ## license 
 
