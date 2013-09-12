@@ -73,6 +73,21 @@
             </div>
             <hr>
             <span>Current flag: </span><span class="label label-default" data-bind="value: someFlags"></span>  
+            <hr>
+<code>
+<pre>&lt;h4&gt;css&lt;/h4&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-sm-1&quot; data-bind=&quot;flagity: { flag: someFlags, css: { active: 1 } }&quot;&gt;1&lt;/div&gt;
+  &lt;div class=&quot;col-sm-1&quot; data-bind=&quot;flagity: { flag: someFlags, css: { active: 2 } }&quot;&gt;2&lt;/div&gt;
+  ...
+&lt;/div&gt;
+&lt;h4&gt;visible&lt;/h4&gt;
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-sm-1&quot; data-bind=&quot;flagity: { flag: someFlags, visible: 1 }&quot;&gt;1&lt;/div&gt;
+  &lt;div class=&quot;col-sm-1&quot; data-bind=&quot;flagity: { flag: someFlags, visible: 2 }&quot;&gt;2&lt;/div&gt;
+  ...
+&lt;/div&gt;</pre>
+</code>
           </div>
         </div> 
       
@@ -80,7 +95,7 @@
       <div id="simpleKeysFlagity" class="panel panel-default">
           <div class="panel-heading"><strong>Simple Flag (flagityWith binding) <small>Keys flags</small></strong></div>
           <div class="panel-body">
-            <form>
+            <form  role="form">
               
               <div class="form-group">
                 <label class="checkbox-inline">
@@ -100,13 +115,11 @@
                 </label>
               </div>
               <div data-bind="flagityWith: simpleFlagKey, flagityOptions: { type: 'keys' }">
-
                 <button type="button" class="btn btn-default" data-bind="flagity: { enable: 'A' }">A (enable)</button>
                 <button type="button" class="btn btn-default" data-bind="flagity: { css: { active: 'B' } }">B (active)</button>
                 <button type="button" class="btn btn-default" data-bind="flagity: { visible: 'C' }">C (visible)</button>
                 <button type="button" class="btn btn-default" data-bind="flagity: { disable: 'D' }">D (disable)</button>
                 <button type="button" class="btn btn-default" data-bind="flagity: { visible: 'E', comparer: function(key, flags) { return true; } }">E (custom comparer always true)</button>
-
               </div>
               
               <hr>
@@ -117,11 +130,123 @@
 
               <p>NOTE: You can use custom binding properties (boolean)</p>
 
+              <hr>
+<code>
+<pre>&lt;div data-bind=&quot;flagityWith: simpleFlagKey, flagityOptions: { type: 'keys' }&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-bind=&quot;flagity: { enable: 'A' }&quot;&gt;A (enable)&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-bind=&quot;flagity: { css: { active: 'B' } }&quot;&gt;B (active)&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-bind=&quot;flagity: { visible: 'C' }&quot;&gt;C (visible)&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-bind=&quot;flagity: { disable: 'D' }&quot;&gt;D (disable)&lt;/button&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; 
+  data-bind=&quot;flagity: { visible: 'E', comparer: function(key, flags) { return true; } }&quot;&gt;E (custom comparer always true)&lt;/button&gt;
+&lt;/div&gt;</pre>
+</code>
+
             </form>
 
         </div>
 
       </div> 
+
+      <!-- HTML tags with binary flags -->
+      <div id="htmlTagsFlagity" class="panel panel-default">
+          <div class="panel-heading"><strong>HTML attributes <small>binary flags</small></strong></div>
+          <div class="panel-body">
+
+          <h4>Defining the flags for the attributes</h4>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <table class="table table-bordered table-condensed">
+                <thead>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Binary Flag</th>
+                  </tr>
+                </thead>
+                <tbody data-bind="foreach: attributes">
+                  <tr>
+                    <td data-bind="text: attr"></td>
+                    <td  class="text-center" data-bind="text: id"></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+              <div class="col-sm-6">
+                <table class="table table-bordered table-condensed">
+                <thead>
+                  <tr>
+                    <th class="text-center">TAG</th>
+                    <th class="text-center">Attibutes</th>
+                    <th class="text-center">OR</th>
+                    <th class="text-center">Flags</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>a</td>
+                    <td>style,href</td>
+                    <td class="text-center">4|32</td>
+                    <td class="text-center">36</td>
+                  </tr>
+                  <tr>
+                    <td>input</td>
+                    <td>style,name,type</td>
+                    <td class="text-center">1|8|32</td>
+                    <td class="text-center">41</td>
+                  </tr>
+                  <tr>
+                    <td>select</td>
+                    <td>style,name,size</td>
+                    <td class="text-center">1|16|32</td>
+                    <td class="text-center">49</td>
+                  </tr>
+                  <tr>
+                    <td>font</td>
+                    <td>size</td>
+                    <td class="text-center">16</td>
+                    <td class="text-center">16</td>
+                  </tr>
+                  <tr>
+                    <td>img</td>
+                    <td>style,src</td>
+                    <td class="text-center">2|32</td>
+                    <td class="text-center">34</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </div>  
+ 
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-3">
+              <form role="form">
+                <div class="form-group">
+                  <label for="tagSelect">Select a Tag</label>
+                  <select class="form-control" 
+                          data-bind="options: tags, optionsText: 'name', value: selectedTag, optionsValue: 'attrs'">
+                  </select>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <h4>Attibutes</h4>
+          <ul data-bind="foreach: attributes">
+            <li data-bind="text: attr, flagity: { flag: $root.selectedTag, visible: $data.id }"></li>
+          </ul>
+          <hr>
+          <span>Flag: </span><span class="label label-default" data-bind="text: selectedTag"></span>
+          <hr>
+<code>
+<pre>&lt;ul data-bind=&quot;foreach: attributes&quot;&gt;
+  &lt;li data-bind=&quot;text: attr, flagity: { flag: $root.selectedTag, visible: $data.id }&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;</pre>
+</code>
+          </div>
+      </div>   
 
     </div> <!-- /container -->
 
@@ -162,11 +287,44 @@
           return keys.join(',');
         }, vm_simpleKeysFlagity);
 
+        // HTML Tags
+        var NAME = 1
+          , SRC = 2
+          , HREF = 4
+          , TYPE = 8
+          , SIZE = 16
+          , STYLE = 32;
+
+        var attr = [
+          { id: 1, attr: 'name'  },
+          { id: 2, attr: 'src'  },
+          { id: 4, attr: 'href'  },
+          { id: 8, attr: 'type'  },
+          { id: 16, attr: 'size'  },
+          { id: 32, attr: 'style' }
+        ];
+
+        var tags = [
+          { name: 'a', attrs: ( STYLE | HREF ) },
+          { name: 'input', attrs: ( STYLE | NAME | TYPE ) },
+          { name: 'select', attrs: ( STYLE | NAME | SIZE ) },
+          { name: 'font', attrs: ( SIZE ) },
+          { name: 'img', attrs: ( STYLE | SRC ) }
+        ];
+
+        var vm_htmlTagsFlagity = {
+            tags: ko.observableArray(tags),
+            selectedTag: ko.observable(0),
+            attributes: ko.observableArray(attr)
+        };
+
         $('document').ready(function(){
             
             ko.applyBindings(vm_oneFlagity, $('#oneFlagity').get(0));
 
             ko.applyBindings(vm_simpleKeysFlagity, $('#simpleKeysFlagity').get(0));
+
+            ko.applyBindings(vm_htmlTagsFlagity, $('#htmlTagsFlagity').get(0));
 
         });
 
